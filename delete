@@ -27,7 +27,7 @@ def delete(workspace = None, variable = None):
    if variable != None:
       workspace.deleteVar(variable)
    else:
-      workspace.server.deleteWs(workspace.curws)      
+      workspace.server.deleteWs(workspace.curWs)      
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
