@@ -19,9 +19,9 @@ Options:
 Variable name defaults to 'default'.
 
 example:
-fetch -t -nmysystem -p2222 -wfood -vbreakfast eggs
+fetch -t -nmysystem -p2222 -wfood eggs
 or
-cat breakfast_foods.txt | fetch -t -nmysystem -p2222 -wfood -vbreakfast
+cat breakfast_foods.txt | fetch -t -nmysystem -p2222 -wfood
 """
 
 def fetch(workspace, variable, tri=False):

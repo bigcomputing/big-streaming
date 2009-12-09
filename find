@@ -19,9 +19,9 @@ Options:
 Variable defaults to 'default'.
 
 example:
-find -t -nmysystem -p2222 -wfood -vbreakfast eggs
+find -t -nmysystem -p2222 -wfood eggs
 or
-cat breakfast_foods.txt | find -t -nmysystem -p2222 -wfood -vbreakfast
+cat breakfast_foods.txt | find -t -nmysystem -p2222 -wfood
 """
 
 def find(workspace, variable, tri=False):
