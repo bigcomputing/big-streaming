@@ -58,4 +58,8 @@ if __name__ == '__main__':
         for value in sys.stdin:
             find(workspace, value.strip(), validOptions['t'])
     else:
-        find(workspace, sys.argv[len(sys.argv)-1], validOptions['t'])
+        if len(sys.argv) > len(options) + 1:
+            find(workspace, sys.argv[len(sys.argv)-1], validOptions['t'])
+        else:
+            find(workspace, validOptions['v'], validOptions['t'])
+            

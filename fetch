@@ -58,4 +58,7 @@ if __name__ == '__main__':
         for value in sys.stdin:
             fetch(workspace, value.strip(), validOptions['t'])
     else:
-        fetch(workspace, sys.argv[len(sys.argv)-1], validOptions['t'])
+        if len(sys.argv) > len(options) + 1:
+            fetch(workspace, sys.argv[len(sys.argv)-1], validOptions['t'])
+        else:
+            fetch(workspace, validOptions['v'], validOptions['t'])
