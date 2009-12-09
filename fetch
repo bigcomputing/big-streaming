@@ -34,12 +34,13 @@ def fetch(workspace, variable, tri=False):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        sys.stderr.write('Usage: fetch [options] variable\n')
+        sys.stderr.write('Usage: fetch [options] variable\nUse -h for help\n')
         sys.exit(1)
     options = argloop.processArgs(sys.argv[1:])
     
-    if options[0] == -h:
+    if options[0] == '-h':
         print helpMessage
+        sys.exit(0)
 
     for opt in options:
         if validOptions.keys().count(opt[1]) < 1:
