@@ -2,3 +2,4 @@
 - Read information from environment variables
 - Code could use a quick refactoring to pull out some repetition.
   This shouldn't be hard, I just want to make sure it is done right.
+- Make stdin reading feed friendly if possible.
