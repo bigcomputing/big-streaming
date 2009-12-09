@@ -26,9 +26,6 @@ def store(workspace, variable, value):
     workspace.store(variable, value)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        sys.stderr.write('Usage: store [options] value\nUse -h for help\n')
-        sys.exit(1)
     options = argloop.processArgs(sys.argv[1:])
     
     if len(options) > 0 and options[0] == '-h':
