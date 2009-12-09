@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+import sys
+from nws.client import NetWorkSpace
+
+def store(val):
+    ws = NetWorkSpace(sys.argv[1],persistent=True)
+    ws.store(sys.argv[2], val)
+
+if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        sys.stderr.write('Usage: store workspace variable value\n')
+        sys.exit(1)
+    elif len(sys.argv) == 3:
+        for value in sys.stdin:
+            store(value)
+    elif len(sys.argv) == 4:
+        store(sys.argv[3])
+    else:
+        sys.stderr.write("I just don't understand")
+
