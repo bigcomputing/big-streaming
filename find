@@ -7,7 +7,7 @@ from nws.client import NetWorkSpace
 validOptions = {'t':False, 'n':'localhost', 'p':'8765', 'w':'__default', 'v':'default'}
 
 helpMessage = """
-Usage: find [options] variable
+Usage: find [options] [variable]
 Find a NetWorkSpace variable value.  stdin variables accepted.
 
 Options:
@@ -15,7 +15,8 @@ Options:
 -n  Hostname to connect to the server on. Defaults to 'localhost'.
 -p  Port to connect to ther server on. Defaults to '8765'.
 -w  Workspace name to use. Defaults to '__default'.
--v  Variable name to use. Defaults to 'default'.
+
+Variable defaults to 'default'.
 
 example:
 find -t -nmysystem -p2222 -wfood -vbreakfast eggs
@@ -34,7 +35,7 @@ def find(workspace, variable, tri=False):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        sys.stderr.write('Usage: find [options] variable\nUse -h for help\n')
+        sys.stderr.write('Usage: find [options] [variable]\nUse -h for help\n')
         sys.exit(1)
     options = argloop.processArgs(sys.argv[1:])
     
