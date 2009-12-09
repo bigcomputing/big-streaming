@@ -9,7 +9,7 @@ def fetch(val):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        sys.stderr.write('Usage: store workspace variable value\n')
+        sys.stderr.write('Usage: fetch workspace variable\n')
         sys.exit(1)
     elif len(sys.argv) == 2:
         for value in sys.stdin:
