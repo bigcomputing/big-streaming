@@ -4,7 +4,7 @@ import sys
 import argloop
 from nws.client import NetWorkSpace
 
-validOptions = {'t':False, 'h':'localhost', 'p':'8765', 'w':'__default', 'v':'default'}
+validOptions = {'t':False, 'n':'localhost', 'p':'8765', 'w':'__default', 'v':'default'}
 
 helpMessage = """
 Usage: find [options] variable
@@ -12,15 +12,15 @@ Find a NetWorkSpace variable value.  stdin variables accepted.
 
 Options:
 -t  Try. Do not block if no values are availible. Off by default.
--h  Hostname to connect to the server on. Defaults to 'localhost'.
+-n  Hostname to connect to the server on. Defaults to 'localhost'.
 -p  Port to connect to ther server on. Defaults to '8765'.
 -w  Workspace name to use. Defaults to '__default'.
 -v  Variable name to use. Defaults to 'default'.
 
 example:
-find -t -hmysystem -p2222 -wfood -vbreakfast eggs
+find -t -nmysystem -p2222 -wfood -vbreakfast eggs
 or
-cat breakfast_foods.txt | find -t -hmysystem -p2222 -wfood -vbreakfast
+cat breakfast_foods.txt | find -t -nmysystem -p2222 -wfood -vbreakfast
 """
 
 def find(workspace, variable, tri=False):
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         else:
             validOptions[opt[1]] = opt[2:]
     
-    workspace = NetWorkSpace(wsName = validOptions['w'], serverHost = validOptions['h'],
+    workspace = NetWorkSpace(wsName = validOptions['w'], serverHost = validOptions['n'],
                              serverPort = int(validOptions['p']))
 
     if len(options) + 1 == len(sys.argv):
