@@ -51,4 +51,4 @@ if __name__ == '__main__':
         for value in sys.stdin:
             store(workspace, validOptions['v'], value.strip())
     else:
-        find(workspace, validOptions['v'], sys.argv[len(sys.argv)-1])
+        store(workspace, validOptions['v'], sys.argv[len(sys.argv)-1])
