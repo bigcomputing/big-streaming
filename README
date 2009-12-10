@@ -9,6 +9,13 @@ REQUIREMENTS
 -Python Client for Big
 -Big server
 
+ENVIRONMENT VARIABLES
+BIGHOST = hostname for server
+BIGPORT = port for server
+BIGWORKSPACE = workspace to use
+BIGVARIABLE = variable to write to
+Arguements have precedence over environment variables.
+
 For more information, pass a -h parameter to any of the
 commands.
 
