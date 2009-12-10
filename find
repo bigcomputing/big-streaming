@@ -19,19 +19,20 @@ import sys
 import argloop
 from nws.client import NetWorkSpace
 
-validOptions = {'t':False, 'n':'localhost', 'p':'8765', 'w':'__default', 'v':'default', 'r':False}
+validOptions = {'t':False, 'n':'localhost', 'p':'8765', 'w':'__default', 'v':'default', 'r':False,
+                'l':False}
 
 helpMessage = """
 Usage: find [options] [variable]
 Find a NetWorkSpace variable value.  stdin variables accepted.
 
 Options:
--t  Try. Do not block if no values are availible. Off by default.
+-t  Try. Do not block if no values are availible.
 -n  Hostname to connect to the server on. Defaults to 'localhost'.
 -p  Port to connect to ther server on. Defaults to '8765'.
 -w  Workspace name to use. Defaults to '__default'.
 -r  read from stdin. Will ignore any variable passed.
-    Off by default.
+-l  Do not add a newline when writing the result to stdout.
 
 Variable defaults to 'default'.
 
@@ -41,14 +42,17 @@ or
 cat breakfast_foods.txt | find -t -r -nmysystem -p2222 -wfood
 """
 
-def find(workspace, variable, tri=False):
+def find(workspace, variable, tri=False, nnl=False):
+    end = ''
+    if not nnl:
+        end = '\n'
     if tri:
         ret = workspace.findTry(variable)
         if ret == None:
             ret = ''
-        sys.stdout.write(ret+'\n')
+        sys.stdout.write(ret+end)
     else:
-        sys.stdout.write(workspace.find(variable)+'\n')
+        sys.stdout.write(workspace.find(variable)+end)
 
 if __name__ == '__main__':
     options = argloop.processArgs(sys.argv[1:])
@@ -71,10 +75,10 @@ if __name__ == '__main__':
 
     if validOptions['r']:
         for value in sys.stdin:
-            find(workspace, value.strip(), validOptions['t'])
+            find(workspace, value.strip(), validOptions['t'], validOptions['l'])
     else:
         if len(sys.argv) > len(options) + 1:
-            find(workspace, sys.argv[len(sys.argv)-1], validOptions['t'])
+            find(workspace, sys.argv[len(sys.argv)-1], validOptions['t'], 
+                 validOptions['l'])
         else:
-            find(workspace, validOptions['v'], validOptions['t'])
-            
+            find(workspace, validOptions['v'], validOptions['t'], validOptions['l'])
