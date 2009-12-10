@@ -1,0 +1,12 @@
+Big Streaming - A streaming-like interface for big
+--------------------------------------------------
+
+Installation
+Make sure argloop.py is in your PYTHON_PATH and the commands
+are in your PATH.  Then run them.
+
+For more information, pass a -h parameter to any of the
+commands.
+
+contact: pat@big-computing.com
+License: Apache 2.0
