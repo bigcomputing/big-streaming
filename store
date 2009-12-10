@@ -57,7 +57,7 @@ if __name__ == '__main__':
             validOptions[opt[1]] = opt[2:]
     
     workspace = NetWorkSpace(wsName = validOptions['w'], serverHost = validOptions['n'],
-                             serverPort = int(validOptions['p']))
+                             serverPort = int(validOptions['p']), persistent = True)
 
     if len(options) + 1 == len(sys.argv):
         for value in sys.stdin:
