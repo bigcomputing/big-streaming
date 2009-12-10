@@ -13,8 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 """
+import os
+
+equivalentEnv = {'BIGHOST':'h','BIGPORT':'p','BIGWORKSPACE':'w','BIGVARIABLE':'v'}
+
 def processArgs(args):
     options=[]
+    for envvar in equivalentEnv.keys():
+        val = os.environ.get(envvar)
+        if val != None and val != '':
+            options.append('-'+equivalentEnv[envvar]+val)
     for arg in args:
         if arg[:1] == '-':
             options.append(arg)
