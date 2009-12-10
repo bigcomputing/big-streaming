@@ -34,6 +34,8 @@ Options:
 -r  read from stdin. Will ignore any variable passed.
 -a  Fetch all values.
 -l  Do not add a newline when writing the result to stdout.
+-d  When reading all values, wait this long (in seconds) before 
+    giving up. Defaults to 1.
     
 Variable name defaults to 'default'.
 
@@ -43,7 +45,8 @@ or
 cat breakfast_foods.txt | fetch -t -r -nmysystem -p2222 -wfood
 """
 
-def fetch(workspace, variable, tri=False, all=False, nnl=False):
+def fetch(workspace, variable, tri=False, all=False, nnl=False,
+          delay=1):
     end = ''
     if not nnl:
         end = '\n'
@@ -53,7 +56,7 @@ def fetch(workspace, variable, tri=False, all=False, nnl=False):
             while ret != None:
                 sys.stdout.write(ret+end)
                 ret = workspace.fetchTry(variable)
-            time.sleep(int(validOptions['d']))
+            time.sleep(int(delay))
             ret = workspace.fetchTry(variable)
     elif tri:
         ret = workspace.fetchTry(variable)
@@ -85,11 +88,11 @@ if __name__ == '__main__':
     if validOptions['r']:
         for value in sys.stdin:
             fetch(workspace, value.strip(), validOptions['t'], validOptions['a'],
-                  validOptions['l'])
+                  validOptions['l'], validOptions['d'])
     else:
         if len(sys.argv) > len(options) + 1:
             fetch(workspace, sys.argv[len(sys.argv)-1], validOptions['t'], validOptions['a'],
-                  validOptions['l'])
+                  validOptions['l'], validOptions['d'])
         else:
             fetch(workspace, validOptions['v'], validOptions['t'], validOptions['a'],
-                  validOptions['l'])
+                  validOptions['l'], validOptions['d'])
