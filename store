@@ -46,6 +46,6 @@ if __name__ == '__main__':
 
     if len(options) + 1 == len(sys.argv):
         for value in sys.stdin:
-            store(workspace, validOptions['v'], value.strip())
+            store(workspace, validOptions['v'], value)
     else:
         store(workspace, validOptions['v'], sys.argv[len(sys.argv)-1])
