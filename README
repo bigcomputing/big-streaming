@@ -19,5 +19,5 @@ Arguements have precedence over environment variables.
 For more information, pass a -h parameter to any of the
 commands.
 
-contact: pat@big-computing.com
+contact: pat AT big-computing DOT com
 License: Apache 2.0
