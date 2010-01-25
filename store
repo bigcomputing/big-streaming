@@ -17,9 +17,10 @@
 
 import sys
 import argloop
-from nws.client import NetWorkSpace
+from nws.client import NetWorkSpace, NwsDeclarationFailedException
 
-validOptions = {'n':'localhost', 'p':'8765', 'w':'__default', 'v':'default'}
+validOptions = {'n':'localhost', 'p':'8765', 'w':'__default', 'v':'default', 't':'fifo'}
+validTypes = ['lifo','fifo','single']
 
 helpMessage = """
 Usage: store [options] value
@@ -30,9 +31,14 @@ Options:
 -p  Port to connect to ther server on. Defaults to '8765'.
 -w  Workspace name to use. Defaults to '__default'.
 -v  Variable name to use. Defaults to 'default'.
+-t  Type of variable to use.  Can be lifo, fifo, or single, which
+    holds only one value and will overwrite it after a second store.
+    Declarations are final, so a second declaration will create a
+    new variable with the same name, and all data under that variable
+    will be lost.  Defaults to fifo.
 
 example:
-store -nmysystem -p2222 -wfood -vbreakfast eggs
+store -nmysystem -p2222 -wfood -vbreakfast -tsingle eggs
 or
 cat breakfast_foods.txt | store -nmysystem -p2222 -wfood -vbreakfast
 """
@@ -58,6 +64,19 @@ if __name__ == '__main__':
     
     workspace = NetWorkSpace(wsName = validOptions['w'], serverHost = validOptions['n'],
                              serverPort = int(validOptions['p']), persistent = True)
+
+    if validTypes.count(validOptions['t']) < 1:
+        print """Variable type: '"""+validOptions['t']+"""' not available. Exiting..."""
+        sys.exit(1)
+    try:
+        workspace.declare(validOptions['v'], validOptions['t'])
+    except NwsDeclarationFailedException:
+        w="WARNING: A contradictory declaration was passed. Deleting varable "+validOptions['v']
+        w+=" and recreating it as type "+validOptions['t']+"."
+        print w
+        workspace.deleteVar(validOptions['v'])
+        workspace.declare(validOptions['v'], validOptions['t'])
+
 
     if len(options) + 1 == len(sys.argv):
         for value in sys.stdin:
