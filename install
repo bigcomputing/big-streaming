@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -x
+
+echo "Moving commands"
+cp fetch /usr/local/bin/big-fetch
+cp find /usr/local/bin/big-find
+cp delete /usr/local/bin/big-delete
+cp store /usr/local/bin/big-store
+
+echo "Setting up argloop library"
+cp argloop.py /usr/lib/python2.6/
+
+echo "Complete!"
